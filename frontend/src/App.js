@@ -1,4 +1,5 @@
 import './App.css';
+import CartPage from './pages/CartPage';
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -18,6 +19,10 @@ function App() {
     {
       path:"/login",
       element:(<LoginPage/>)
+    },
+    {
+      path:"/cart",
+      element:(<CartPage/>)
     }
   ])
   return (
