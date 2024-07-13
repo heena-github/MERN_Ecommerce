@@ -28,90 +28,11 @@ import {
 } from "@heroicons/react/20/solid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { selectAllProduct, fetchAllProductsAsync, fetchProductsByFilterAsync, selectTotalItems } from "../ProductListSlice";
+import { selectAllProduct, fetchAllProductsAsync, fetchProductsByFilterAsync, selectTotalItems, selectBrands, selectCategories, fetchBrandsAsync, fetchCategoriesAsync } from "../ProductListSlice";
 import { ITEMS_PER_PAGE } from "../../../app/constants";
 
-const filters = [
-  {
-    id: "brand",
-    name: "Brands",
-    options: [
-      { value: "Essence", label: "Essence", checked: false },
-      { value: "Glamour Beauty", label: "Glamour Beauty", checked: false },
-      { value: "Velvet Touch", label: "Velvet Touch", checked: false },
-      { value: "Chic Cosmetics", label: "Chic Cosmetics", checked: false },
-      { value: "Nail Couture", label: "Nail Couture", checked: false },
-      { value: "Calvin Klein", label: "Calvin Klein", checked: false },
-      { value: "Chanel", label: "Chanel", checked: false },
-      { value: "Dior", label: "Dior", checked: false },
-      {
-        value: "Dolce & Gabbana",
-        label: "Dolce & Gabbana",
-        checked: false,
-      },
-      { value: "Gucci", label: "Gucci", checked: false },
-      {
-        value: "Annibale Colombo",
-        label: "Annibale Colombo",
-        checked: false,
-      },
-      { value: "Furniture Co.", label: "Furniture Co.", checked: false },
-      { value: "Knoll", label: "Knoll", checked: false },
-      { value: "Bath Trends", label: "Bath Trends", checked: false },
-      { value: undefined, label: undefined, checked: false },
-      { value: "Apple", label: "Apple", checked: false },
-      { value: "Asus", label: "Asus", checked: false },
-      { value: "Huawei", label: "Huawei", checked: false },
-      { value: "Lenovo", label: "Lenovo", checked: false },
-      { value: "Dell", label: "Dell", checked: false },
-      { value: "Fashion Trends", label: "Fashion Trends", checked: false },
-      { value: "Gigabyte", label: "Gigabyte", checked: false },
-      { value: "Classic Wear", label: "Classic Wear", checked: false },
-      { value: "Casual Comfort", label: "Casual Comfort", checked: false },
-      { value: "Urban Chic", label: "Urban Chic", checked: false },
-      { value: "Nike", label: "Nike", checked: false },
-      { value: "Puma", label: "Puma", checked: false },
-      { value: "Off White", label: "Off White", checked: false },
-      {
-        value: "Fashion Timepieces",
-        label: "Fashion Timepieces",
-        checked: false,
-      },
-      { value: "Longines", label: "Longines", checked: false },
-      { value: "Rolex", label: "Rolex", checked: false },
-      { value: "Amazon", label: "Amazon", checked: false },
-    ],
-  },
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "beauty", label: "beauty", checked: false },
-      { value: "fragrances", label: "fragrances", checked: false },
-      { value: "furniture", label: "furniture", checked: false },
-      { value: "groceries", label: "groceries", checked: false },
-      {
-        value: "home-decoration",
-        label: "home decoration",
-        checked: false,
-      },
-      {
-        value: "kitchen-accessories",
-        label: "kitchen accessories",
-        checked: false,
-      },
-      { value: "laptops", label: "laptops", checked: false },
-      { value: "mens-shirts", label: "mens shirts", checked: false },
-      { value: "mens-shoes", label: "mens shoes", checked: false },
-      { value: "mens-watches", label: "mens watches", checked: false },
-      {
-        value: "mobile-accessories",
-        label: "mobile accessories",
-        checked: false,
-      },
-    ],
-  },
-];
+
+
 
 const ProductList = () => {
   const sortOptions = [
@@ -130,10 +51,25 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProduct);
   const totalItems = useSelector(selectTotalItems)
+  const brands = useSelector(selectBrands)
+  const categories = useSelector(selectCategories)
   
   const [filter,setFilter] = useState({})
   const [sort,setSort] = useState({})
   const [page,setPage] = useState(1)
+
+  const filters = [  
+    {
+      id: "category",
+      name: "Category",
+      options: categories
+    },
+    {
+      id: "brand",
+      name: "Brands",
+      options: brands
+    },
+  ];
  
   function handleFilter(e,section,option){
     const newFilter={...filter}
@@ -172,6 +108,11 @@ const ProductList = () => {
     setPage(1)
   },[totalItems,sort])
 
+  useEffect(()=>{
+    dispatch(fetchBrandsAsync())
+    dispatch(fetchCategoriesAsync())
+  },[dispatch])
+
   return (
     <div>
       <div>
@@ -180,6 +121,7 @@ const ProductList = () => {
             <MobileFilter 
             mobileFiltersOpen={mobileFiltersOpen}
             setMobileFiltersOpen={setMobileFiltersOpen}
+            filters={filters}
             handleFilter={handleFilter}
             />
 
@@ -262,7 +204,7 @@ const ProductList = () => {
                 </h2>
 
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                  <DesktopFilter handleFilter={handleFilter}/>
+                  <DesktopFilter handleFilter={handleFilter} filters={filters}/>
 
                   {/* Product grid */}
                   <div className="lg:col-span-3">
@@ -284,7 +226,7 @@ const ProductList = () => {
 };
 
 
-function MobileFilter({mobileFiltersOpen,setMobileFiltersOpen,handleFilter}){
+function MobileFilter({mobileFiltersOpen,setMobileFiltersOpen,filters,handleFilter}){
    {/* Mobile filter dialog */}
   
   return(
@@ -401,7 +343,7 @@ function MobileFilter({mobileFiltersOpen,setMobileFiltersOpen,handleFilter}){
   )
 }
 
-function DesktopFilter({handleFilter}){
+function DesktopFilter({filters,handleFilter}){
    {/* Filters */}
   return(
     <form className="hidden lg:block">
@@ -473,22 +415,23 @@ function DesktopFilter({handleFilter}){
 }
 
 function Pagination({page,setPage,handlePage,totalItems=55}){
+  const totalPage = Math.ceil(totalItems/ITEMS_PER_PAGE)
   return(
 <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
 
 <div className="flex flex-1 justify-between sm:hidden">
-                  <a
-                    href="#"
-                    className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  <div
+                  onClick={(e)=>handlePage(page>1?page-1:page)}
+                  className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
                   >
                     Previous
-                  </a>
-                  <a
-                    href="#"
+                  </div>
+                  <div
+                   onClick={(e)=>handlePage(page<totalPage?page+1:page)}
                     className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
                   >
                     Next
-                  </a>
+                  </div>
                 </div>
                 <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                   <div>
@@ -503,18 +446,18 @@ function Pagination({page,setPage,handlePage,totalItems=55}){
                       className="isolate inline-flex -space-x-px rounded-md shadow-sm"
                       aria-label="Pagination"
                     >
-                      <a
-                        href="#"
-                        className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                      <div
+                      onClick={(e)=>handlePage(page>1?page-1:page)}
+                      className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                       >
                         <span className="sr-only">Previous</span>
                         <ChevronLeftIcon
                           className="h-5 w-5"
                           aria-hidden="true"
                         />
-                      </a>
+                      </div>
                       {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
-                      {Array.from({length:Math.ceil(totalItems/ITEMS_PER_PAGE)}).map(
+                      {Array.from({length:totalPage}).map(
                         (el,index)=>(
                           <div
                         onClick={(e)=>handlePage(index+1)}
@@ -528,16 +471,16 @@ function Pagination({page,setPage,handlePage,totalItems=55}){
                       
                       
                       
-                      <a
-                        href="#"
-                        className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                      <div
+                      onClick={(e)=>handlePage(page<totalPage?page+1:page)}
+                      className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                       >
                         <span className="sr-only">Next</span>
                         <ChevronRightIcon
-                          className="h-5 w-5"
-                          aria-hidden="true"
+                        className="h-5 w-5"
+                        aria-hidden="true"
                         />
-                      </a>
+                      </div>
                     </nav>
                   </div>
                 </div>
@@ -551,7 +494,7 @@ return(
   <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
       {products.map((product) => (
-        <Link to={"/product-details"}>
+        <Link to={`/product-details/${product.id}`}>
           <div
             key={product.id}
             className="group relative border-solid border-2 p-2"
