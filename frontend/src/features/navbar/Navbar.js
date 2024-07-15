@@ -12,6 +12,8 @@ import {
 } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectItems } from '../cart/cartSlice'
 
 const user = {
     name: 'Tom Cook',
@@ -22,9 +24,7 @@ const user = {
   const navigation = [
     { name: 'Dashboard', href: '#', current: true },
     { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
+   
   ]
   const userNavigation = [
     { name: 'Your Profile', link: '/' },
@@ -37,6 +37,8 @@ const user = {
   }
 
 const Navbar = ({children}) => {
+
+  const items= useSelector(selectItems)
   return (
     <div>
 
@@ -87,9 +89,9 @@ const Navbar = ({children}) => {
                         
                       </button>
                       </Link>
-                      <span className="inline-flex items-center z-10 rounded-md mb-7 -ml-3 bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-        2
-      </span>
+                      {items.length > 0 &&<span className="inline-flex items-center z-10 rounded-md mb-7 -ml-3 bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+        {items.length}
+      </span>}
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
@@ -181,9 +183,9 @@ const Navbar = ({children}) => {
                      
                     </button>
                     </Link>
-                    <span className="inline-flex items-center z-10 rounded-md mb-7 -ml-3 bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-        2
-      </span>
+                    {items.length > 0 &&<span className="inline-flex items-center z-10 rounded-md mb-7 -ml-3 bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                      {items.length}
+      </span>}
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
