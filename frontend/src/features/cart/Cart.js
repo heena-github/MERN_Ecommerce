@@ -1,9 +1,10 @@
 import { Fragment, useState } from 'react'
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteItemFromCartAsync, selectItems, updateCartAsync } from './cartSlice'
+
 
 
 const Cart = () => {
@@ -12,6 +13,7 @@ const Cart = () => {
     const totalAmount = items.reduce((acc,item)=>item.price*item.quantity+acc,0)
     const totalItems = items.reduce((acc,item)=>item.quantity+acc,0)
     const dispatch = useDispatch()
+    
 
     function handleQuantity(e,item){
      dispatch(updateCartAsync({...item,quantity:+e.target.value}))
@@ -23,6 +25,7 @@ const Cart = () => {
 
   return (
     <>
+    {!items.length && <Navigate to={'/'}></Navigate>} 
     <div>
     <div className="mx-auto max-w-7xl bg-white mt-12 px-4 sm:px-6 lg:px-8">
     

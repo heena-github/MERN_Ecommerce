@@ -6227,11 +6227,32 @@
     {
       "email": "john@gmail.com",
       "password": "Qwerty123",
+      "addresses": [
+        {
+          "name": "Heena Patni",
+          "email": "heena@gmail.com",
+          "phone": "9326088773",
+          "street": "136/c martin street",
+          "city": "Thane",
+          "state": "Maharashtra",
+          "pincode": "400612"
+        },
+        {
+          "name": "Abhishek R",
+          "email": "abhishek@gmail.com",
+          "phone": "9876459032",
+          "street": "11th main",
+          "city": "Banglore",
+          "state": "karnataka",
+          "pincode": "560034"
+        }
+      ],
       "id": 1
     },
     {
       "email": "demo@gmail.com",
       "password": "Demo12345",
+      "addresses": [],
       "id": 2
     }
   ],
@@ -6301,70 +6322,6 @@
       "user": 2
     },
     {
-      "id": 78,
-      "title": "Apple MacBook Pro 14 Inch Space Grey",
-      "description": "The MacBook Pro 14 Inch in Space Grey is a powerful and sleek laptop, featuring Apple's M1 Pro chip for exceptional performance and a stunning Retina display.",
-      "category": "laptops",
-      "price": 1999.99,
-      "discountPercentage": 9.25,
-      "rating": 3.13,
-      "stock": 39,
-      "tags": [
-        "laptops",
-        "apple"
-      ],
-      "brand": "Apple",
-      "sku": "QDKO6NRJ",
-      "weight": 4,
-      "dimensions": {
-        "width": 12.38,
-        "height": 21.55,
-        "depth": 27.95
-      },
-      "warrantyInformation": "1 month warranty",
-      "shippingInformation": "Ships in 1 week",
-      "availabilityStatus": "In Stock",
-      "reviews": [
-        {
-          "rating": 5,
-          "comment": "Would buy again!",
-          "date": "2024-05-23T08:56:21.622Z",
-          "reviewerName": "Hunter Gordon",
-          "reviewerEmail": "hunter.gordon@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Would buy again!",
-          "date": "2024-05-23T08:56:21.622Z",
-          "reviewerName": "Emma Wilson",
-          "reviewerEmail": "emma.wilson@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Very pleased!",
-          "date": "2024-05-23T08:56:21.622Z",
-          "reviewerName": "David Martinez",
-          "reviewerEmail": "david.martinez@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "30 days return policy",
-      "minimumOrderQuantity": 1,
-      "meta": {
-        "createdAt": "2024-05-23T08:56:21.622Z",
-        "updatedAt": "2024-05-23T08:56:21.622Z",
-        "barcode": "3883623063065",
-        "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/1.png",
-        "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/2.png",
-        "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/3.png"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/thumbnail.png",
-      "quantity": 1,
-      "user": 1
-    },
-    {
       "id": 90,
       "title": "Puma Future Rider Trainers",
       "description": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
@@ -6428,6 +6385,115 @@
       "thumbnail": "https://cdn.dummyjson.com/products/images/mens-shoes/Puma%20Future%20Rider%20Trainers/thumbnail.png",
       "quantity": 1,
       "user": 1
+    }
+  ],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": 90,
+          "title": "Puma Future Rider Trainers",
+          "description": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
+          "category": "mens-shoes",
+          "price": 89.99,
+          "discountPercentage": 3.64,
+          "rating": 4.85,
+          "stock": 10,
+          "tags": [
+            "footwear",
+            "casual shoes"
+          ],
+          "brand": "Puma",
+          "sku": "64ORN32I",
+          "weight": 8,
+          "dimensions": {
+            "width": 14.58,
+            "height": 25.54,
+            "depth": 19.57
+          },
+          "warrantyInformation": "2 year warranty",
+          "shippingInformation": "Ships in 1 month",
+          "availabilityStatus": "In Stock",
+          "reviews": [
+            {
+              "rating": 5,
+              "comment": "Very happy with my purchase!",
+              "date": "2024-05-23T08:56:21.623Z",
+              "reviewerName": "Lucas Allen",
+              "reviewerEmail": "lucas.allen@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Awesome product!",
+              "date": "2024-05-23T08:56:21.623Z",
+              "reviewerName": "Mason Pearson",
+              "reviewerEmail": "mason.pearson@x.dummyjson.com"
+            },
+            {
+              "rating": 4,
+              "comment": "Very satisfied!",
+              "date": "2024-05-23T08:56:21.623Z",
+              "reviewerName": "Hunter Gordon",
+              "reviewerEmail": "hunter.gordon@x.dummyjson.com"
+            }
+          ],
+          "returnPolicy": "90 days return policy",
+          "minimumOrderQuantity": 9,
+          "meta": {
+            "createdAt": "2024-05-23T08:56:21.623Z",
+            "updatedAt": "2024-05-23T08:56:21.623Z",
+            "barcode": "3562849555769",
+            "qrCode": "https://assets.dummyjson.com/public/qr-code.png"
+          },
+          "images": [
+            "https://cdn.dummyjson.com/products/images/mens-shoes/Puma%20Future%20Rider%20Trainers/1.png",
+            "https://cdn.dummyjson.com/products/images/mens-shoes/Puma%20Future%20Rider%20Trainers/2.png",
+            "https://cdn.dummyjson.com/products/images/mens-shoes/Puma%20Future%20Rider%20Trainers/3.png",
+            "https://cdn.dummyjson.com/products/images/mens-shoes/Puma%20Future%20Rider%20Trainers/4.png"
+          ],
+          "thumbnail": "https://cdn.dummyjson.com/products/images/mens-shoes/Puma%20Future%20Rider%20Trainers/thumbnail.png",
+          "quantity": 1,
+          "user": 1
+        }
+      ],
+      "totalAmount": 89.99,
+      "totalItems": 1,
+      "user": {
+        "email": "john@gmail.com",
+        "password": "Qwerty123",
+        "addresses": [
+          {
+            "name": "Heena Patni",
+            "email": "heena@gmail.com",
+            "phone": "9326088773",
+            "street": "136/c martin street",
+            "city": "Thane",
+            "state": "Maharashtra",
+            "pincode": "400612"
+          },
+          {
+            "name": "Abhishek R",
+            "email": "abhishek@gmail.com",
+            "phone": "9876459032",
+            "street": "11th main",
+            "city": "Banglore",
+            "state": "karnataka",
+            "pincode": "560034"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Abhishek R",
+        "email": "abhishek@gmail.com",
+        "phone": "9876459032",
+        "street": "11th main",
+        "city": "Banglore",
+        "state": "karnataka",
+        "pincode": "560034"
+      },
+      "id": 1
     }
   ]
 }
