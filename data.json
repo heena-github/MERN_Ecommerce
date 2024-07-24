@@ -6229,22 +6229,23 @@
       "password": "Qwerty123",
       "addresses": [
         {
-          "name": "Heena Patni",
-          "email": "heena@gmail.com",
-          "phone": "9326088773",
-          "street": "136/c martin street",
-          "city": "Thane",
-          "state": "Maharashtra",
-          "pincode": "400612"
-        },
-        {
-          "name": "Abhishek R",
+          "name": "Abhishek Rathore",
           "email": "abhishek@gmail.com",
           "phone": "9876459032",
-          "street": "11th main",
+          "street": "13th main",
+          "pincode": "560034",
           "city": "Banglore",
           "state": "karnataka",
-          "pincode": "560034"
+          "pinCode": ""
+        },
+        {
+          "name": "Jack Morris",
+          "email": "jack@gmail.com",
+          "phone": "1245679822",
+          "street": "12th cross",
+          "pincode": "100018",
+          "city": "Delhi",
+          "state": "Delhi"
         }
       ],
       "id": 1
