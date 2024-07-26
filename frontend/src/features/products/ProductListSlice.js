@@ -1,5 +1,5 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
-import {fetchAllProducts,fetchBrands,fetchCategories,fetchProductsByFilter,fetchProductsById} from './ProductListApi'
+import {createProduct, fetchAllProducts,fetchBrands,fetchCategories,fetchProductsByFilter,fetchProductsById, updateProduct} from './ProductListApi'
 
 const initialState={
 products: [],
@@ -25,6 +25,22 @@ export const fetchProductByIdAsync=createAsyncThunk(
         return response.data
     }
     )
+
+export const createProductAsync=createAsyncThunk(
+    'product/createProduct',
+    async(product)=>{
+        const response = await createProduct(product)
+        return response.data
+    }
+)
+
+export const updateProductAsync=createAsyncThunk(
+    'product/updateProduct',
+    async(update)=>{
+      const response = await updateProduct(update)
+      return response.data
+    }
+)
 
 export const fetchProductsByFilterAsync = createAsyncThunk(
     'product/fetchProductsByFilter',
@@ -54,7 +70,9 @@ export const ProductSlice = createSlice({
     name:"product",
     initialState,
     reducers:{
-
+       clearSelectedProduct:(state)=>{
+        state.selectedProduct=null
+       }
     },
     extraReducers:(builder)=>{
         builder
@@ -94,11 +112,26 @@ export const ProductSlice = createSlice({
          state.status='idle'
          state.selectedProduct=action.payload
         })
+        .addCase(createProductAsync.pending,(state,action)=>{
+            state.status='loading'
+        })
+        .addCase(createProductAsync.fulfilled,(state,action)=>{
+         state.status='idle'
+         state.products.push(action.payload)
+        })
+        .addCase(updateProductAsync.pending,(state,action)=>{
+            state.status='loading'
+        })
+        .addCase(updateProductAsync.fulfilled,(state,action)=>{
+         state.status='idle'
+         const index = state.products.findIndex((product)=>product.id===action.payload.id)
+         state.products[index] = action.payload
+        })
         // builder.addCase(fetchAllProductsAsync.rejected,(state,action)=>{})
     }
 })
 
-export const {} = ProductSlice.actions
+export const {clearSelectedProduct} = ProductSlice.actions
 
 // global state
  export const selectAllProduct = (state)=>state.product.products

@@ -12,11 +12,11 @@ const Signup = () => {
   } = useForm();
   console.log(errors);
 
-  const dispatch = useDispatch()
-  const user = useSelector(selectLoggedInUser)
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
   return (
     <div>
-    {user && <Navigate to={'/'}></Navigate>}
+      {user && <Navigate to={"/"}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -34,8 +34,15 @@ const Signup = () => {
             noValidate
             className="space-y-6"
             onSubmit={handleSubmit((data) => {
-              dispatch(createUserAsync({email:data.email,password:data.password,addresses:[]}))
-              console.log(data)
+              dispatch(
+                createUserAsync({
+                  email: data.email,
+                  password: data.password,
+                  addresses: [],
+                  user:'user'
+                })
+              );
+              console.log(data);
             })}
           >
             <div>
